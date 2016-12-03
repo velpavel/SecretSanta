@@ -132,6 +132,7 @@ def route_flow(bot_in, message_in, session_in):
 
     if not user.operation.current_operation or user.operation.current_operation != opGroup:
         user.operation.current_operation = opGroup
+        user.operation.additional_info = {}
         current_step = 0
     else:
         if user.operation.operation_status in flow_list:

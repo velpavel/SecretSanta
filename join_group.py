@@ -84,6 +84,7 @@ def find_group():
         if message.content_type == 'text':
             group_id = user.operation.additional_info.get(key_ad_info_buttons, dict()).get(message.text)
             group = session.query(Group).filter(Group.id == group_id).first()
+            if key_ad_info_buttons in user.operation.additional_info: user.operation.additional_info.pop(key_ad_info_buttons)
             if group:
                 user.operation.additional_info['group_id'] = group.id
                 text = 'Выбрана группа <b>{}</b> от автора {}. Дата распределения: {}.'.format(group.name, group.owner, group.date_shuffle.strftime('%d.%m.%Y'))
@@ -181,6 +182,7 @@ def route_flow(bot_in, message_in, session_in):
     user.operation.decode_additional()
     if not user.operation.current_operation or user.operation.current_operation != opGroup:
         user.operation.current_operation = opGroup
+        user.operation.additional_info = {}
         current_step = 0
     else:
         if user.operation.operation_status in flow_list:
