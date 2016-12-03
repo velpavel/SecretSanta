@@ -12,8 +12,7 @@ from telebot import types
 import db_connector
 from models import User, Operation, DBSession
 from registration import register_flow, opRegister
-import create_group, join_group
-#import admin_functions, do_quest, add_quest
+import create_group, join_group, admin_functions
 import standard, utils
 
 #import logging
@@ -91,6 +90,9 @@ def routing(message):
             handle_start_help(message, session, user)
         elif not user.registrationDone or user.operation.current_operation == opRegister:
             register_flow(bot, message, session)
+        elif text in admin_functions.admin_commands:
+            #Для правильной работы необходим заполненный admin_id в config
+            admin_functions.admin_flow(bot, message, session)
         elif text in standard.create_group or user.operation.current_operation == create_group.opGroup:
             create_group.route_flow(bot, message,session)
         elif text in standard.find_group or user.operation.current_operation == join_group.opGroup:

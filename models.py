@@ -118,7 +118,7 @@ class Member(Base):
     active = Column(Boolean, default=False)
 
     def __repr__(self):
-        return self.description
+        return self.user.name
 
 def create_all():
     Base.metadata.create_all(engine)
