@@ -5,10 +5,10 @@
 
 PaVel 09.2016
 """
-import models
 import shutil, os
 
 if not os.path.exists(r'config.ini'):
     shutil.copy(r'config_skeleton.ini', r'config.ini')
 
+import models
 models.create_all()

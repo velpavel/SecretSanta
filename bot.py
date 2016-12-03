@@ -45,7 +45,7 @@ def handle_start_help(message, session, user):
     global admin_id
     help_str='''Добро пожаловать.
 
-    Этот бот поможет вам органзовать и поучавствовать в "Тайном Санте".'''
+    Этот бот поможет вам организовать и поучаствовать в "Тайном Санте".'''
     #Ниже заполнение пустого admin_id
     if not admin_id:
         admin_id = str(message.from_user.id)

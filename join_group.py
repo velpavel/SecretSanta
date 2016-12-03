@@ -47,7 +47,7 @@ def find_group():
     key_ad_info_buttons = 'buttons-group_id'
 
     def ask_name(ask_msg=''):
-        ask_text = 'Введте название или часть названия группы, которую вы ищите. Не менее 3х символов.'
+        ask_text = 'Введите название или часть названия группы, которую вы ищете. Не менее 3х символов.'
         user.operation.additional_info[key_ad_info_step] = val_ad_info_need_name
         bot.send_message(message.chat.id, ask_msg+ask_text,
                          reply_markup=standard.cancel_keyboard())
@@ -86,7 +86,7 @@ def find_group():
             group = session.query(Group).filter(Group.id == group_id).first()
             if group:
                 user.operation.additional_info['group_id'] = group.id
-                text = 'Выбрана группа <b>{}</b> от автора {}. Дата распределения '.format(group.name, group.owner, group.date_shuffle.strftime('%d.%m.%Y'))
+                text = 'Выбрана группа <b>{}</b> от автора {}. Дата распределения: {}.'.format(group.name, group.owner, group.date_shuffle.strftime('%d.%m.%Y'))
                 bot.send_message(message.chat.id, text, parse_mode='HTML', reply_markup=standard.cancel_keyboard())
                 member = session.query(Member).filter(Member.group == group, Member.user == user).first()
                 if member:
@@ -126,7 +126,7 @@ def ask_password():
 
 
 def ask_suggestion():
-    val = get_text_val('Введите ваши пожелания к подарку')
+    val = get_text_val('Введите ваши пожелания к подарку.')
     if val:
         member = Member(group=group, user=user,)
         session.add(member)
@@ -140,7 +140,7 @@ def finish():
     member = session.query(Member).filter(Member.group == group, Member.user == user).first()
     if member:
         msg = '''Ваше участие в группе {} зарегистрировано. Дата распределения: {}
-Подарок будет выслан на "{}" по адресу {} {}.
+Подарок будет выслан получателю "{}" по адресу {} {}.
 Ваши пожелания к подарку: {}'''.format(group.name, group.date_shuffle.strftime('%d.%m.%Y'),
                                       user.fio, user.index, user.address,
                                       member.suggestions)

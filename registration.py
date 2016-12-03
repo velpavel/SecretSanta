@@ -59,7 +59,7 @@ def ask_fio():
 
 def ask_address():
     val = get_text_val(
-        'Введите ваш почтовый адрес (например, "г. Москва, ул Тверская д.8/1 кв. 202")')
+        'Введите ваш почтовый адрес (например, "г. Москва, ул. Тверская д.8/1 кв. 202")')
     if val:
         user.address = val
         return 1
@@ -79,7 +79,7 @@ def finish_reg():
     user.registrationDone = 1
     db_connector.put_user_operation(session, user)
     bot.send_message(message.chat.id,
-                     'Регистрация завершена. Теперь введите название группы в которой вы участвуете или создайте свою', reply_markup = standard.standard_keyboard())
+                     'Регистрация завершена. Теперь введите название группы, в которой вы участвуете, или создайте свою.', reply_markup = standard.standard_keyboard())
 
 
 def register_flow(bot_in, message_in, session_in):
@@ -111,7 +111,7 @@ def register_flow(bot_in, message_in, session_in):
         user.operation.current_operation = opRegister
         current_step = 0
         bot.send_message(message.chat.id,
-                         'Для начала необходимо зарегистрироватсья - ввести свои данные для получения посылок')
+                         'Для начала необходимо зарегистрироваться - ввести свои данные для получения посылок')
     else:
         if user.operation.operation_status in flow_list:
             current_step = flow_list.index(user.operation.operation_status)
