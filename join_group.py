@@ -189,7 +189,7 @@ def route_flow(bot_in, message_in, session_in):
             current_step = 0
     group = user.operation.additional_info.get('group_id')
     if group:
-        group = session.query(Group).filter(Group.id == group, Group.owner == user).first()
+        group = session.query(Group).filter(Group.id == group).first()
     if not group:
         current_step = 0
 
