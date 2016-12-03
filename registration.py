@@ -7,6 +7,7 @@ import standard
 import db_connector
 from telebot import types
 from models import User
+import datetime
 
 bot = None
 message = None
@@ -77,6 +78,7 @@ def ask_index():
 
 def finish_reg():
     user.registrationDone = 1
+    user.registrationDate = datetime.datetime.now()
     db_connector.put_user_operation(session, user)
     bot.send_message(message.chat.id,
                      'Регистрация завершена. Теперь введите название группы, в которой вы участвуете, или создайте свою.', reply_markup = standard.standard_keyboard())
