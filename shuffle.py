@@ -16,7 +16,6 @@ def send_message(id, text):
         bot.send_message(id,text)
     except Exception as e:
         err_text = "{} Send Error (tid: {}): {} : {}".format(datetime.datetime.now().strftime('%x %X'), id, e.__class__, e)
-        print(err_text)
         save_to_log('system', comment_text=err_text)
 
 def start_shuffle():
