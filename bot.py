@@ -2,7 +2,7 @@
 '''Файл для запуска бота.
 Здесь же маршрутизация сообщения.
 
-PaVel 09.2016
+PaVel 12.2016
 '''
 import telebot
 import configparser
